@@ -5,10 +5,8 @@ import axios from "axios";
 class Pokemon extends Component {
   constructor(props) {
     super(props);
-    this.state = { pokemon: {} };
+    this.state = { pokemon: null };
   }
-
-  // pokemonName = ;
 
   componentDidMount() {
     axios
@@ -27,14 +25,24 @@ class Pokemon extends Component {
   }
 
   render() {
-    return (
-      <div className="pokemon">
-        <img src={this.state.pokemon.imageUrl} alt={this.state.pokemon.name} />
-        <ul>
-          <li>Pokemon name: {this.state.pokemon.name} </li>
-        </ul>
-      </div>
-    );
+    let display;
+    if (!this.state.pokemon) {
+      display = <p>Loading...</p>;
+    } else {
+      display = (
+        <>
+          <img
+            src={this.state.pokemon.imageUrl}
+            alt={this.state.pokemon.name}
+          />
+          <ul>
+            <li>{this.state.pokemon.name} </li>
+          </ul>
+        </>
+      );
+    }
+
+    return <div className="pokemon">{display}</div>;
   }
 }
 
