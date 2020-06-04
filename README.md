@@ -24,6 +24,7 @@ The API key you set will be accessible within React like so:
 process.env.REACT_APP_API_KEY
 ```
 
+---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
