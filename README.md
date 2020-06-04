@@ -1,3 +1,30 @@
+# Environment Variables with React
+
+You don't want to upload your API keys to somewhere public like GitHub.
+
+You want to save your API key as an environment variable.
+
+React projects made with `create-react-app` can access API keys automatically when placed in certain files.
+
+You'll notice that in `.gitignore` in the root directory of your project, there are some `.env` files. As per Create React App's docs on [Adding Environment Variables](https://create-react-app.dev/docs/adding-custom-environment-variables/), it should be fine to put your enviroment variables in a `.env.local` file in your root directory.
+
+
+Make sure you prepend the variable name with `REACT_APP_`
+
+```shell
+REACT_APP_API_KEY=keyForApi
+REACT_APP_API_KEY="keyForApi"
+```
+
+Git should automatically ignore this file and any other files/directories you add to `.gitignore`
+
+The API key you set will be accessible within React like so:
+
+```javascript=
+process.env.REACT_APP_API_KEY
+```
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
