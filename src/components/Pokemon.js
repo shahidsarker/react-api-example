@@ -1,15 +1,20 @@
 import React, { Component } from "react";
+import Search from "./Search";
 import axios from "axios";
 
 class Pokemon extends Component {
   constructor(props) {
     super(props);
-    this.state = { pokemon: null };
+    this.state = { pokemon: null, searchInput: "" };
   }
 
-  componentDidMount() {
+  handleInput = (e) => {
+    this.setState({ searchInput: e.target.value });
+  };
+
+  handleSearch = () => {
     axios
-      .get("https://pokeapi.co/api/v2/pokemon/" + this.props.name)
+      .get("https://pokeapi.co/api/v2/pokemon/" + this.state.searchInput)
       .then((response) => {
         const data = response.data;
 
@@ -21,7 +26,7 @@ class Pokemon extends Component {
         this.setState({ pokemon: newPokemonObj });
       })
       .catch((err) => console.log(err));
-  }
+  };
 
   render() {
     let display;
@@ -41,7 +46,16 @@ class Pokemon extends Component {
       );
     }
 
-    return <div className="pokemon">{display}</div>;
+    return (
+      <div className="pokemon">
+        <Search
+          value={this.state.searchInput}
+          onChange={this.handleInput}
+          onSearch={this.handleSearch}
+        />
+        {display}
+      </div>
+    );
   }
 }
 
