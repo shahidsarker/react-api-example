@@ -16,11 +16,13 @@ class Dictionary extends Component {
       .get(url, { params: { key: API_KEY } })
       .then((response) => {
         const data = response.data;
-        console.log(data);
         const definitions = data[0].shortdef;
         this.setState({ word, definitions });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        this.setState({ definitions: [] });
+      });
   }
 
   render() {
@@ -30,9 +32,9 @@ class Dictionary extends Component {
     } else {
       defList = (
         <ol>
-          {this.state.definitions.map((def) => (
-            <li>{def}</li>
-          ))}
+          {this.state.definitions.map((def, index) => {
+            return <li key={index}>{def}</li>;
+          })}
         </ol>
       );
     }
